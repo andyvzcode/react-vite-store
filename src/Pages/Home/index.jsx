@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import Layout from '../../Components/Layout'
 import Card from '../../Components/Card'
 import ProductDetail from '../../Components/ProductDetail';
-
+import CheckoutSideMenu from '../../Components/CheckoutSIdeMenu';
 const apiUrl = 'https://api.escuelajs.co/api/v1';
 
 const Home = () => {
@@ -25,6 +25,7 @@ const Home = () => {
         ))}
       </div>
       <ProductDetail />
+      <CheckoutSideMenu />
     </Layout>
   )
 }

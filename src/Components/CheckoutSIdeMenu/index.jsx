@@ -3,16 +3,16 @@ import { XMarkIcon } from '@heroicons/react/24/solid'
 import { useContext } from 'react';
 import { shoppingCartContext } from '../../Context';
 
-const ProductDetail = () => {
-    const { isProductDetailOpen, closeProductDetail,productToShow } = useContext(shoppingCartContext)
+const CheckoutSideMenu = () => {
+    const { isCheckoutOpen, checkoutClose } = useContext(shoppingCartContext)
     return (
-        <aside className={`${isProductDetailOpen ? 'flex' : 'hidden'} product-detail flex-col fixed right-0 top-68 bottom-1 border border-black rounded-lg bg-white`}>
+        <aside className={`${isCheckoutOpen ? 'flex' : 'hidden'} checkou-side-menu flex-col fixed right-0 top-68 bottom-1 border border-black rounded-lg bg-white`}>
             <div className='flex justify-between items-center p-4 border-b border-black'>
-                <h2 className='text-xl font-medium'>Product Detail</h2>
-                <button className='text-black-500 cursor-pointer' onClick={() => closeProductDetail()}><XMarkIcon className="size-6 text-black-500" /> </button>
+                <h2 className='text-xl font-medium'>My Order</h2>
+                <button className='text-black-500 cursor-pointer' onClick={() => checkoutClose()}><XMarkIcon className="size-6 text-black-500" /> </button>
             </div>
             <div className='flex flex-col items-center p-2'>
-                <figure>
+                {/* <figure>
                     <img src={productToShow?.images[0]} onError={({ currentTarget }) => {
                         currentTarget.onerror = null;
                         currentTarget.src = 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg';
@@ -22,10 +22,10 @@ const ProductDetail = () => {
                     <span className='text-2xl font-medium text-center'>{productToShow?.title}</span>
                     <span className='text-md font-medium'>${productToShow?.price}</span>
                     <span className='text-md font-light text-justify'>{productToShow?.description}</span>
-                </p>
+                </p> */}
             </div>
         </aside>
     )
 }
 
-export default ProductDetail
+export default CheckoutSideMenu 
