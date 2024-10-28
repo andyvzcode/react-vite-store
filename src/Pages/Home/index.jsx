@@ -13,12 +13,13 @@ const Home = () => {
     fetch(`${apiUrl}/products`)
       .then(response => response.json())
       .then(data => setItems(data))
+
   }, [])
   return (
     <Layout>
       <h1>Home</h1>
       {items && items.map(item => (
-        <Card key={item.id} title={item.title} body={item.body} />
+        <Card key={item.id} data={item} />
       ))}
       <Card />
     </Layout>
