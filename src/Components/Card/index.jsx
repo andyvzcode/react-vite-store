@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { shoppingCartContext } from '../../Context';
-import {  PlusIcon } from '@heroicons/react/24/solid'
+import {  PlusIcon, CheckIcon } from '@heroicons/react/24/solid'
 const Card = (data) => {
     const { count, setCount, openProductDetail, setProductToShow, cartProducts, setCartProducts,checkoutOpen, closeProductDetail, checkoutClose} = useContext(shoppingCartContext)
 
@@ -15,7 +15,23 @@ const Card = (data) => {
         setCartProducts([...cartProducts, product])
         checkoutOpen()
         closeProductDetail()
-        console.log(cartProducts)
+    }
+    const renderIcon = (id) => {
+        const isProductInCart = cartProducts.filter(product => product.id === id).length > 0
+        if(!isProductInCart){ 
+            return (<div className='absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-1' onClick={(e) => {
+                e.stopPropagation()
+                addProductToCart(data.data) 
+            }}>
+                <span className='text-black text-sm' ><PlusIcon className="size-5 text-black-400" /></span>
+            </div>)
+        }else{
+            return (<div className='absolute top-0 right-0 flex justify-center items-center bg-black w-6 h-6 rounded-full m-1' >
+                <span className='text-white text-sm' ><CheckIcon className="size-5 text-white-600" /></span>
+            </div>)
+        }
+
+
     }
     return (
     <div className='bg-white cursor-pointer w-56 h-60 rounded-lg' onClick={() => showProduct(data.data)}>
@@ -32,12 +48,7 @@ const Card = (data) => {
             alt=''
             className='w-full h-full object-cover rounded-lg'
             />
-            <div className='absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-1' onClick={
-                (e) => {
-                e.stopPropagation() 
-                addProductToCart(data.data)}}>
-                <span className='text-black text-sm' ><PlusIcon className="size-5 text-black-400" /></span>
-            </div>
+            {renderIcon(data.data.id)}
         </figure>
         <p className='flex justify-between'>
             <span className='text-sm font-light'>{data?.data?.title || "Product"}</span>
